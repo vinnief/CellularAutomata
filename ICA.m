@@ -15,7 +15,7 @@ classdef ICA < ECA
 	%------------------------------------------------------------------------
   
 	
-	properties %------------------------------------------- PUBLIC PROPERTIES
+  properties %------------------------------------------- PUBLIC PROPERTIES
     energy          %The Ising energy of the state
     temperature     %The temperature needed to evolve stochastically
     stochfrac       %The percentage of cells that evolve stochastically
@@ -27,13 +27,14 @@ classdef ICA < ECA
 
   
 	
-	methods %------------------------------------------------ PUBLIC METHODS
+  methods %------------------------------------------------ PUBLIC METHODS
     %------------------------------- object constructor and setters
     function obj = ICA(rule,state,temperature,stochfrac)
       narginchk(4,4)
       obj@ECA(rule,state);
       obj.temperature = temperature;
       obj.stochfrac = stochfrac;
+      obj.energy = mean(obj.getStateEnergy());
     end 
     function set.temperature(obj,newTemperature)
       validateattributes(newTemperature,{'numeric'},{'scalar',...
